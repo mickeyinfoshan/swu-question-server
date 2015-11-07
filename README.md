@@ -5,5 +5,5 @@ Generate Questions Automatically
 
 `npm install`
 
-`npm start \[port\]`
+`npm start [port]`
 
