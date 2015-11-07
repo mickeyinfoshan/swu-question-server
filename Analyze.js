@@ -27,7 +27,8 @@ module.exports = function(text, fn) {
             fn(body);
         }
         else{
-            console.log(response.statusCode);
+            console.log("Analyze failed!!!");
+            console.log(body);
         }
     }
 };
