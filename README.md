@@ -3,5 +3,7 @@ Generate Questions Automatically
 
 # Usage:
 
-  npm install
-  npm start <port>
+`npm install`
+
+`npm start \[port\]`
+
