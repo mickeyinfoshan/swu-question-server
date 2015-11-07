@@ -25,3 +25,5 @@ http.createServer(function(req, res) {
 
 	});
 }).listen(port);
+
+console.log("swu-server is running!")

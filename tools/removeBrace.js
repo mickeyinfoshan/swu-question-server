@@ -1,8 +1,8 @@
 module.exports = function(text) {
 
-	var t = text.replace(/^\([^]*\)$/g, '');
-	t = t.replace(/^（[^]*）$/g, '');
-	return t;
+	// var t = text.replace(/^\([^]*\)$/g, '');
+	// t = t.replace(/^（[^]*）$/g, '');
+	// return t;
 
 	var lbz = text.indexOf('（');
     var lby = text.indexOf('(');
