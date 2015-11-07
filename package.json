@@ -1,0 +1,23 @@
+{
+  "name": "swu-question-server",
+  "version": "1.0.0",
+  "description": "Generate questions automatically",
+  "main": "index.js",
+  "dependencies": {
+    "jsonp": "^0.2.0",
+    "qs": "^6.0.0",
+    "request": "^2.65.0",
+    "http-request": "^0.7.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "node index.js"
+  },
+  "keywords": [
+    "SWU",
+    "questions"
+  ],
+  "author": "Mickey, Psyche",
+  "license": "MIT"
+}
