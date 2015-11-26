@@ -2,12 +2,8 @@
 /**
  * 词性标注（pos）问题 || 这段是依存句法（ne）问题
  */
-
-var pushQuestions = require("../tools/pushQuestions.js");
-var componentReplace = require("../tools/componentReplace.js")
-
-module.exports = posGenerateQuestionsBySentence;
 function posGenerateQuestionsBySentence(sentence) {
+    NERNum = 0;
     var questions = [];
     for(var i = 0; i<sentence.length; i++) {
         var word = sentence[i];
@@ -15,12 +11,20 @@ function posGenerateQuestionsBySentence(sentence) {
             continue;
         newQuestion = posGenerateQuestionByWord(sentence,word);
         if(newQuestion)
-            questions = pushQuestions(questions,newQuestion);
+            questions = pushQuestion(questions,newQuestion);
     }
     return questions;
 }
 
 function posGenerateQuestionByWord(sentence,word) {
+    if(word.parent > -1 && sentence[word.parent].arg) {
+      var args = sentence[word.parent].arg;
+      for(var i = 0; i < args.length; i++) {
+        if(args[i].type == 'A0' && args[i].beg == word.id) {
+          return false;
+        }
+      }
+    }
     var rpcLbl = posGetReplacementAndLabel(word);
     if(!rpcLbl)
         return null;
@@ -41,7 +45,7 @@ function posGetReplacementAndLabel (word) {
     var rpcLblArray = [
         rpcLblFactory('谁', '人名'),
         rpcLblFactory('哪家机构', '机构名'),
-        rpcLblFactory('哪里', '地点')
+        rpcLblFactory('哪里', '地名')
     ];
     var rpcLbl = null;
     //Nh:人名 Ni:机构名 Ns:地名
@@ -49,8 +53,12 @@ function posGetReplacementAndLabel (word) {
     var posArray2 = ['E-Nh','E-Ni','E-Nl','E-Ns'];
     for(var i = 0; i<posArray.length; i++) {
         if(word.ne.indexOf(posArray[i])>=0) {
+            NERNum++;
             rpcLbl =  rpcLblArray[i];
             if(i == 3){
+              if(word.relate == 'COO') {
+                return false;
+              }
                 rpcLbl = rpcLblArray[2];
             }
             break;
@@ -58,6 +66,7 @@ function posGetReplacementAndLabel (word) {
     }
     for(var i = 0; i<posArray.length; i++) {
         if(word.ne.indexOf(posArray2[i])>=0) {
+            NERNum++;
             rpcLbl =  rpcLblArray[i];
             if(i == 3){
                 rpcLbl = rpcLblArray[2];
@@ -93,7 +102,7 @@ function replaceNode(sentence,word,replacement) {
 
 //判断当前词和关键词是否存在可替换的依存关系
 function isAncestor(sentence,word1,word2){
-    if(word2.parent == word1.id/* || (word1.parent == -1 && word2.parent != -1)*/){
+    if(word2.parent == word1.id){
         return true;
     }
     else if (word2.parent == -1){

@@ -4,11 +4,6 @@
  */
 var lastKeyWords = ['经历','持续','花费','为期','长达'];
 
-var pushQuestions = require("../tools/pushQuestions.js");
-var componentReplace = require("../tools/componentReplace.js")
-
-module.exports = lastQuestionsBySentence;
-
 function lastQuestionsBySentence(sentence) {
 	var questions = [];
 	for(var wordIndex = 0; wordIndex<sentence.length; wordIndex++) {
@@ -30,7 +25,7 @@ function lastQuestionsBySentence(sentence) {
 							text : text
 						};
 						if(newQuestion)
-                			questions = pushQuestions(questions, newQuestion);
+                			questions = pushQuestion(questions, newQuestion);
 					}
 
 			}
