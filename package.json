@@ -1,26 +1,18 @@
 {
-  "name": "swu-question-server",
+  "name": "swu-question_all",
   "version": "1.0.0",
-  "description": "Generate questions automatically",
-  "main": "index.js",
-  "dependencies": {
-    "http-request": "^0.7.0",
-    "jsonp": "^0.2.0",
-    "qs": "^6.0.0",
-    "request": "^2.65.0"
-  },
-  "devDependencies": {},
+  "description": "",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "SWU",
-    "questions"
-  ],
-  "bin": {
-    "swu-questions": "inDirectory.js"
-  },
-  "author": "Mickey, Psyche",
-  "license": "MIT"
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "body-parser": "^1.14.1",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "iconv-lite": "^0.4.13",
+    "socket.io": "^1.3.7"
+  }
 }

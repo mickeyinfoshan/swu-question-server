@@ -2,17 +2,13 @@
 /**
  * 对数字类问题提问
  */
-
-var pushQuestions = require("../tools/pushQuestions.js");
-var componentReplace = require("../tools/componentReplace.js")
-
 function mqQuestion(sentence){
 	var mqs = [];
 	for(var wordIndex = 0; wordIndex<sentence.length-1;){
 		var word = sentence[wordIndex];
 		var nextWord = sentence[wordIndex+1];
 		var mqList = [];
-		if(word.pos == 'm'){
+		if(word.pos == 'm' && word.cont.indexOf('一') == -1){
 			mqList = [word];
 			for(var wi = wordIndex+1;wi<sentence.length-1;wi=wi+1){
 				var wi_next = wi + 1;
@@ -51,16 +47,19 @@ function mqQuestion(sentence){
 				//console.log(text);
 			}
 			if(indexOfWord==0){
-				text = text + '多少';
+				//console.log(word.cont);
+				if(word.cont.indexOf('第') > -1) {
+					text = text + '第几';
+				}else {
+					text = text + '多少';					
+				}
 			}
 		}
 		var newQuestion = {
 			text : text,
-			label : 'mq'
+			label : '数字型'
 		};
-		questions = pushQuestions(questions,newQuestion);
+		questions = pushQuestion(questions,newQuestion);
 	}
 	return questions;
 }
-
-module.exports = mqQuestion;
